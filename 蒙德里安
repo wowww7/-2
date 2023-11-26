@@ -1,0 +1,75 @@
+ArrayList<Rect> rectangles;
+
+void setup() {
+  size(1000, 1000);
+  
+  rectangles = new ArrayList<Rect>();
+
+  rectangles.add(new Rect(0, 0, 300, 100)); 
+  rectangles.add(new Rect(0, 400, 100, 300));
+  rectangles.add(new Rect(900, 0, 100, 700));
+  rectangles.add(new Rect(350, 600, 250, 250));
+  rectangles.add(new Rect(100, 850, 250, 150));
+  rectangles.add(new Rect(600, 0, 300, 100));
+  rectangles.add(new Rect(0, 700, 100, 300));
+  rectangles.add(new Rect(600, 100, 300, 250));
+  rectangles.add(new Rect(100, 100, 500, 500));
+  rectangles.add(new Rect(900, 700, 100, 300));
+  rectangles.add(new Rect(600, 700, 300, 250));
+  rectangles.add(new Rect(100, 600, 250, 250));
+  rectangles.add(new Rect(350, 850, 250, 100));
+  rectangles.add(new Rect(0, 95, 900, 20));
+  rectangles.add(new Rect(295, 0, 20, 95));
+  rectangles.add(new Rect(595, 0, 20, 950));
+  rectangles.add(new Rect(895, 0, 20, 1000));
+  rectangles.add(new Rect(95, 95, 20, 1000));
+  rectangles.add(new Rect(0, 395, 95, 20));
+  rectangles.add(new Rect(0, 695, 1000, 20));
+  rectangles.add(new Rect(100, 595, 795, 20));
+  rectangles.add(new Rect(595, 345, 300, 20));
+  rectangles.add(new Rect(745, 345, 20, 250));
+  rectangles.add(new Rect(350, 945, 550, 20));
+  rectangles.add(new Rect(95, 845, 500, 20));
+}
+
+void draw() {
+  background(255);
+  
+  for (Rect rect : rectangles) {
+    rect.display();
+  }
+  
+  // 检测鼠标是否被点击
+  if (mousePressed) {
+    for (Rect rect : rectangles) {
+      // 判断鼠标点击位置是否在矩形内
+      if (mouseX >= rect.x && mouseX <= rect.x + rect.w && mouseY >= rect.y && mouseY <= rect.y + rect.h) {
+        rect.changeColor(); // 改变矩形颜色
+      }
+    }
+  }
+}
+
+// 自定义矩形类
+class Rect {
+  int x, y, w, h;
+  color c;
+  
+  Rect(int x, int y, int w, int h) {
+    this.x = x;
+    this.y = y;
+    this.w = w;
+    this.h = h;
+    this.c = color(0);
+  }
+  
+  void display() {
+    noStroke();
+    fill(c);
+    rect(x, y, w, h);
+  }
+  
+  void changeColor() {
+    c = color(random(255), random(255), random(255));
+  }
+}
